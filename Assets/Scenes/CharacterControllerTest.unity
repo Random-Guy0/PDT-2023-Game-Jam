@@ -633,6 +633,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1373673528049853437, guid: 7a82f35c46a9f884684501b9ce629239, type: 3}
+      propertyPath: jumpHeight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373673528049853437, guid: 7a82f35c46a9f884684501b9ce629239, type: 3}
       propertyPath: speedMultiplier
       value: 2
       objectReference: {fileID: 0}

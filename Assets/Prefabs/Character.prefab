@@ -181,13 +181,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeAbility: 0
   controller: {fileID: 1809885036620601350}
-  moveSpeed: 6
+  moveSpeed: 3
   gravity: -9.81
-  jumpHeight: 3
+  jumpHeight: 5
   speedMultiplier: 1
-  crouchPassThroughTimer: 0.5
+  smoothInputSpeed: 0.1
   groundCheck: {fileID: 1402262094970762580}
-  groundDistance: 0.4
+  groundDistance: 0.1
   groundMask:
     serializedVersion: 2
     m_Bits: 192
