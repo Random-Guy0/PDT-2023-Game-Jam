@@ -16,15 +16,16 @@ public class Block : MonoBehaviour
     public int Height { get; private set; }
     public BlockLayerAlignment LayerAlignment { get; private set; }
 
-    public void Pickup(Transform playerTransform, Vector3 pickupPosition, Block parent = null)
+    public void Pickup(Transform playerTransform, Vector3 pickupPosition, int height, BlockLayerAlignment layerAlignment, Block parent = null)
     {
         rb.isKinematic = true;
         pickupTrigger.enabled = false;
         transform.position = pickupPosition;
         transform.rotation = Quaternion.identity;
         transform.parent = playerTransform;
-
-        this.Parent = parent;
+        Height = height;
+        LayerAlignment = layerAlignment;
+        Parent = parent;
     }
 
     public void Drop(Vector3 playerPosition, float direction)

@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="68d6c817-f417-43b8-ba50-a370e5f7b93b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PDT-2023-Game-Jam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PDT-2023-Game-Jam/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayerControls.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerControls.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CharacterControllerTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CharacterControllerTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Block.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Block.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BlockHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BlockHolder.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +107,7 @@
       <workItem from="1690706041262" duration="4180000" />
       <workItem from="1690718031539" duration="2246000" />
       <workItem from="1690786048856" duration="5075000" />
-      <workItem from="1690802490500" duration="11998000" />
+      <workItem from="1690802490500" duration="15821000" />
     </task>
     <servers />
   </component>
