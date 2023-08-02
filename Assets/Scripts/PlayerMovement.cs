@@ -95,7 +95,15 @@ public class PlayerMovement : MonoBehaviour
         
         yVelocity += gravity * Time.deltaTime;
 
-        xInputVector = Mathf.SmoothDamp(xInputVector, xVelocity, ref smoothInputVelocity, smoothInputSpeed);
+        if (xVelocity == 0 && !isGrounded)
+        {
+            //Character is moving through air without input
+        }
+        else
+        {
+            xInputVector = Mathf.SmoothDamp(xInputVector, xVelocity, ref smoothInputVelocity, smoothInputSpeed);
+        }
+        
         controller.Move(new Vector3(xInputVector, yVelocity, 0) * moveSpeed * Time.deltaTime);
     }
 }
