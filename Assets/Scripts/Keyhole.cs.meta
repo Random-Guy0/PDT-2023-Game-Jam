@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 14e1caae250842e46aa4fe2c39bc0f8c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - keyholeBlockGameobject: {fileID: 1006214487174849710, guid: 14f6e5aebbdd3714fb3c43be43c2bcd9, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
