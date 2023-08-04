@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Keyhole : MonoBehaviour
 {
+    [SerializeField] private Sprite unlockedSprite;
     [SerializeField] private GameObject keyholeBlockGameobject;
     [SerializeField] private float keyholeBlockScale = 0.5f;
     [SerializeField] private KeyRow[] blockPositions;
@@ -25,7 +26,12 @@ public class Keyhole : MonoBehaviour
 
     public void CreateKeyhole()
     {
-        keyholeBlockGameobject.transform.localScale = Vector3.one * keyholeBlockScale;
+        Vector3 scale = new Vector3(1f, blockPositions.Length * keyholeBlockScale * 1.5f, 1f);
+        transform.localScale = scale;
+        
+        Vector3 blockScale = Vector3.one * keyholeBlockScale;
+        blockScale.y /= scale.y;
+        keyholeBlockGameobject.transform.localScale = blockScale;
 
         for (int i = transform.childCount - 1; i >= 0; i--)
         {
@@ -34,8 +40,9 @@ public class Keyhole : MonoBehaviour
         
         for (int i = 0; i < blockPositions.Length; i++)
         {
-            Vector3 position = i * keyholeBlockScale * Vector3.up;
+            Vector3 position = i * keyholeBlockScale * 3f * Vector3.up;
             position += transform.position;
+            position.y -= blockPositions.Length * keyholeBlockScale * 1.8f;
 
             if (blockPositions[i].center)
             {
@@ -45,27 +52,17 @@ public class Keyhole : MonoBehaviour
             if (blockPositions[i].left)
             {
                 Vector3 leftPos = position;
-                leftPos.x -= keyholeBlockScale;
+                leftPos.x -= keyholeBlockScale * 3f;
                 Instantiate(keyholeBlockGameobject, leftPos, Quaternion.identity, transform);
             }
             
             if (blockPositions[i].right)
             {
                 Vector3 rightPos = position;
-                rightPos.x += keyholeBlockScale;
+                rightPos.x += keyholeBlockScale * 3f;
                 Instantiate(keyholeBlockGameobject, rightPos, Quaternion.identity, transform);
             }
         }
-
-        coll = GetComponent<BoxCollider>();
-        DestroyImmediate(coll);
-        
-        coll = gameObject.AddComponent<BoxCollider>();
-
-        coll.isTrigger = true;
-        Vector3 size = new Vector3(3f, blockPositions.Length * keyholeBlockScale * 1.5f, 1f);
-        coll.size = size;
-        coll.center = (0.5f / 3f) * blockPositions.Length * Vector3.up;
     }
 
     public bool CompareKey(Block topBlock)
@@ -132,14 +129,7 @@ public class Keyhole : MonoBehaviour
 
     private void Unlock()
     {
-        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
-        foreach (SpriteRenderer sprite in sprites)
-        {
-            sprite.color = Color.green;
-        }
-
-        Locked = false;
-        Destroy(GetComponent<BoxCollider>());
+        GetComponent<SpriteRenderer>().sprite = unlockedSprite;
     }
 }
 
