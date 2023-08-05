@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 3353355228452328273}
   - component: {fileID: 3206743652987885559}
   - component: {fileID: 1411854364117926726}
+  - component: {fileID: -4290969791771390382}
   m_Layer: 0
   m_Name: Character with block systems
   m_TagString: Untagged
@@ -332,6 +333,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e52c8f0e-47c1-410d-87ec-03eddcd7f4cb
     m_ActionName: Player/Crouch[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -4290969791771390382}
+        m_TargetAssemblyTypeName: ResetPlayer, Assembly-CSharp
+        m_MethodName: OnReset
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 10a53fae-45b7-4954-906b-d4048e7041c1
+    m_ActionName: Player/Reset[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -350,6 +367,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 5011257212306260531}
+--- !u!114 &-4290969791771390382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625113850905460220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7996029380b39314cb6e4bd280933a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockHolder: {fileID: 1411854364117926726}
 --- !u!1 &4012385451463971603
 GameObject:
   m_ObjectHideFlags: 0
