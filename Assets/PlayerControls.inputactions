@@ -31,6 +31,33 @@
                     "processors": "",
                     "interactions": "Hold(duration=0.25),Press(behavior=1)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pickup Block",
+                    "type": "Button",
+                    "id": "82b21bc1-c229-493e-a1f3-7bb0bb1c106d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drop Block",
+                    "type": "Button",
+                    "id": "1ed47d42-546a-4da3-8f7d-56afd13d3386",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Use Key",
+                    "type": "Button",
+                    "id": "b2e6cf1d-f092-4d1a-8f19-c287d99f4f89",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -50,33 +77,6 @@
                     "id": "1036f9a3-88d7-4458-9f13-66a16f39cf7b",
                     "path": "1DAxis",
                     "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "778ddde0-b464-4745-be3d-e22d96cb909d",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "56653ff9-55ff-4619-8e2c-cdb3ce0b2964",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -86,6 +86,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a02ccbb1-25d0-4b2d-bcf0-61f2746cc936",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pickup Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2e16078-c444-47da-9085-f77aafdc0678",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0759dd2-ae22-46ba-a813-c13c5b435d9f",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
