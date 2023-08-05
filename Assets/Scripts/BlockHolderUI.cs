@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class BlockHolderUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject pressArrowText;
+    [SerializeField] private GameObject leftArrow;
+    [SerializeField] private GameObject rightArrow;
+    [SerializeField] private GameObject upArrow;
+
+    public void DisableAll()
     {
-        
+        pressArrowText.SetActive(false);
+        leftArrow.SetActive(false);
+        rightArrow.SetActive(false);
+        upArrow.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnableLeftArrow()
     {
-        
+        leftArrow.SetActive(true);
+        pressArrowText.SetActive(true);
+    }
+
+    public void EnableRightArrow()
+    {
+        rightArrow.SetActive(true);
+        pressArrowText.SetActive(true);
+    }
+
+    public void EnableUpArrow()
+    {
+        upArrow.SetActive(true);
+        pressArrowText.SetActive(true);
     }
 }
