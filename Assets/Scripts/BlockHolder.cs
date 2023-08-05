@@ -83,7 +83,15 @@ public class BlockHolder : MonoBehaviour
             {
                 topBlock.Drop(transform.position, 1f);
                 topBlock = topBlock.Parent;
-                height = topBlock.Height;
+
+                if (topBlock != null)
+                {
+                    height = topBlock.Height;
+                }
+                else
+                {
+                    height = 0;
+                }
             }
         }
     }

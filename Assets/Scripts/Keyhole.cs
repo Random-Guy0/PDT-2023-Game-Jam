@@ -97,6 +97,11 @@ public class Keyhole : MonoBehaviour
                 Debug.Log("RIGHT " + currentHeight);
             }
 
+            if (result)
+            {
+                Debug.Log(currentBlock.LayerAlignment.ToString() + " " + currentHeight + " SUCCESS");
+            }
+            
             currentBlock = currentBlock.Parent;
         }
 
