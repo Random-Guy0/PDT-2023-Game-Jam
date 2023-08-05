@@ -198,7 +198,7 @@ public class BlockHolder : MonoBehaviour
     {
         if (context.performed && currentKeyhole != null && currentKeyhole.Locked)
         {
-            if (topBlock != null && currentKeyhole.CompareKey(topBlock))
+            if (topBlock != null && currentKeyhole.CompareKey(topBlock) && currentKeyhole.DestroyBlocks)
             {
                 for (int i = 0; i < blockParent.transform.childCount; i++)
                 {

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Keyhole : MonoBehaviour
 {
+    [field: SerializeField] public bool DestroyBlocks { get; private set; } = true;
     [SerializeField] private Sprite unlockedSprite;
     [SerializeField] private GameObject keyholeBlockGameobject;
     [SerializeField] private float keyholeBlockScale = 0.5f;
@@ -20,6 +21,7 @@ public class Keyhole : MonoBehaviour
 
     private void Start()
     {
+        //onUnlock += method; to attach allow a method to be executed when the keyhole unlocks
         onUnlock += Unlock;
         Locked = true;
     }
@@ -73,36 +75,29 @@ public class Keyhole : MonoBehaviour
 
         bool result = currentHeight == blockPositions.Length;
 
-        while (currentBlock != null && result != false)
+        while (currentBlock != null && result)
         {
             currentHeight = currentBlock.Height;
-            Debug.Log(currentHeight);
             KeyRow currentRow = blockPositions[currentHeight - 1];
-            if ((currentBlock.LayerAlignment == BlockLayerAlignment.Center && !currentRow.center) &&
-                RowHasLayerAlignment(currentBlock, currentRow, BlockLayerAlignment.Center))
+            Block[] blockRow = GetBlockRow(currentBlock);
+            bool containsCenter = BlockRowContainsLayerAlignment(blockRow, BlockLayerAlignment.Center);
+            bool containsLeft = BlockRowContainsLayerAlignment(blockRow, BlockLayerAlignment.Left);
+            bool containsRight = BlockRowContainsLayerAlignment(blockRow, BlockLayerAlignment.Right);
+            if ((containsCenter && !currentRow.center) || (!containsCenter && currentRow.center))
             {
                 result = false;
-                Debug.Log("CENTER " + currentHeight);
-            }
-            else if ((currentBlock.LayerAlignment == BlockLayerAlignment.Left && !currentRow.left) &&
-                     RowHasLayerAlignment(currentBlock, currentRow, BlockLayerAlignment.Left))
-            {
-                result = false;
-                Debug.Log("LEFT " + currentHeight);
-            }
-            else if ((currentBlock.LayerAlignment == BlockLayerAlignment.Right && !currentRow.right) &&
-                     RowHasLayerAlignment(currentBlock, currentRow, BlockLayerAlignment.Right))
-            {
-                result = false;
-                Debug.Log("RIGHT " + currentHeight);
-            }
-
-            if (result)
-            {
-                Debug.Log(currentBlock.LayerAlignment.ToString() + " " + currentHeight + " SUCCESS");
             }
             
-            currentBlock = currentBlock.Parent;
+            if ((containsLeft && !currentRow.left) || (!containsLeft && currentRow.left))
+            {
+                result = false;
+            }
+            if ((containsRight && !currentRow.right) || (!containsRight && currentRow.right))
+            {
+                result = false;
+            }
+            
+            currentBlock = blockRow[^1].Parent;
         }
 
         if (result)
@@ -113,20 +108,30 @@ public class Keyhole : MonoBehaviour
         return result;
     }
 
-    private bool RowHasLayerAlignment(Block currentBlock, KeyRow currentRow, BlockLayerAlignment layerAlignment)
+    private Block[] GetBlockRow(Block currentBlock)
     {
-        bool result = false;
+        List<Block> result = new List<Block>();
         int currentHeight = currentBlock.Height;
         while (currentBlock != null && currentBlock.Height == currentHeight)
         {
-            if (currentBlock.LayerAlignment == layerAlignment &&
-                currentRow.GetRowPositionFromLayerAlignment(layerAlignment))
+            result.Add(currentBlock);
+            currentBlock = currentBlock.Parent;
+        }
+
+        return result.ToArray();
+    }
+
+    private bool BlockRowContainsLayerAlignment(Block[] blockRow, BlockLayerAlignment layerAlignment)
+    {
+        bool result = false;
+
+        foreach (Block block in blockRow)
+        {
+            if (block.LayerAlignment == layerAlignment)
             {
                 result = true;
                 break;
             }
-
-            currentBlock = currentBlock.Parent;
         }
 
         return result;
