@@ -7,6 +7,8 @@ using UnityEngine.InputSystem.Controls;
 
 public class BlockHolder : MonoBehaviour
 {
+    [SerializeField] private BlockHolderUI ui;
+    
     private Block currentBlockToPickup;
     private Keyhole currentKeyhole;
 
@@ -20,6 +22,15 @@ public class BlockHolder : MonoBehaviour
     {
         blockParent = new GameObject("Block Parent");
         blockParent.transform.SetParent(transform);
+    }
+
+    private void Update()
+    {
+        if (currentBlockToPickup == null)
+        {
+            StopAllCoroutines();
+            ui.DisableAll();
+        }
     }
 
     public void PickupBlock(InputAction.CallbackContext context)
@@ -141,6 +152,7 @@ public class BlockHolder : MonoBehaviour
 
     private IEnumerator WaitToPlaceLeft()
     {
+        ui.EnableLeftArrow();
         yield return WaitForKeyDown(Keyboard.current.leftArrowKey);
 
         if (currentBlockToPickup != null)
@@ -154,10 +166,12 @@ public class BlockHolder : MonoBehaviour
         }
 
         StopAllCoroutines();
+        ui.DisableAll();
     }
 
     private IEnumerator WaitToPlaceRight()
     {
+        ui.EnableRightArrow();
         yield return WaitForKeyDown(Keyboard.current.rightArrowKey);
 
         if (currentBlockToPickup != null)
@@ -171,10 +185,12 @@ public class BlockHolder : MonoBehaviour
         }
 
         StopAllCoroutines();
+        ui.DisableAll();
     }
 
     private IEnumerator WaitToPlaceTop()
     {
+        ui.EnableUpArrow();
         yield return WaitForKeyDown(Keyboard.current.upArrowKey);
 
         if (currentBlockToPickup != null)
@@ -183,6 +199,7 @@ public class BlockHolder : MonoBehaviour
         }
 
         StopAllCoroutines();
+        ui.DisableAll();
     }
 
     private void PlaceTop()
