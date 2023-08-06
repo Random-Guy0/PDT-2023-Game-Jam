@@ -12,7 +12,7 @@ public class BlockHolder : MonoBehaviour
     private Block currentBlockToPickup;
     private Keyhole currentKeyhole;
 
-    private Block topBlock;
+    public Block TopBlock { get; private set; }
 
     private int height = 0;
 
@@ -37,19 +37,19 @@ public class BlockHolder : MonoBehaviour
     {
         if (context.performed && currentBlockToPickup != null)
         {
-            if (topBlock == null)
+            if (TopBlock == null)
             {
                 height = 1;
-                topBlock = currentBlockToPickup;
+                TopBlock = currentBlockToPickup;
                 currentBlockToPickup = null;
-                topBlock.Pickup(blockParent.transform, transform.position + Vector3.up, height, BlockLayerAlignment.Center);
+                TopBlock.Pickup(blockParent.transform, transform.position + Vector3.up, height, BlockLayerAlignment.Center);
             }
             else
             {
                 bool canPlaceLeft = true;
                 bool canPlaceRight = true;
 
-                Block currentBlock = topBlock;
+                Block currentBlock = TopBlock;
                 while (currentBlock != null && currentBlock.Height == height)
                 {
                     if (currentBlock.LayerAlignment == BlockLayerAlignment.Left)
@@ -90,20 +90,30 @@ public class BlockHolder : MonoBehaviour
     {
         if (context.performed)
         {
-            if (topBlock != null)
+            if (TopBlock != null)
             {
-                topBlock.Drop(transform.position, 1f);
-                topBlock = topBlock.Parent;
+                TopBlock.Drop(transform.position, 1f);
+                TopBlock = TopBlock.Parent;
 
-                if (topBlock != null)
+                if (TopBlock != null)
                 {
-                    height = topBlock.Height;
+                    height = TopBlock.Height;
                 }
                 else
                 {
                     height = 0;
                 }
             }
+        }
+    }
+
+    public void DropAllBlocks()
+    {
+        height = 0;
+        while (TopBlock != null)
+        {
+            TopBlock.Drop(transform.position, 1f);
+            TopBlock = TopBlock.Parent;
         }
     }
 
@@ -135,11 +145,17 @@ public class BlockHolder : MonoBehaviour
         {
             currentBlockToPickup = null;
         }
+
+        Keyhole otherKeyhole = other.GetComponent<Keyhole>();
+        if (otherKeyhole != null && otherKeyhole.Equals(currentKeyhole))
+        {
+            currentKeyhole = null;
+        }
     }
 
     public BlockType GetCurrentBlockPower()
     {
-        return topBlock.BlockType;
+        return TopBlock.BlockType;
     }
 
     private IEnumerator WaitForKeyDown(KeyControl key)
@@ -160,8 +176,8 @@ public class BlockHolder : MonoBehaviour
             Vector3 pickupPosition = transform.position + Vector3.up * height;
             pickupPosition.x -= 1;
             currentBlockToPickup.Pickup(blockParent.transform, pickupPosition, height, BlockLayerAlignment.Left,
-                topBlock);
-            topBlock = currentBlockToPickup;
+                TopBlock);
+            TopBlock = currentBlockToPickup;
             currentBlockToPickup = null;
         }
 
@@ -179,8 +195,8 @@ public class BlockHolder : MonoBehaviour
             Vector3 pickupPosition = transform.position + Vector3.up * height;
             pickupPosition.x += 1;
             currentBlockToPickup.Pickup(blockParent.transform, pickupPosition, height, BlockLayerAlignment.Right,
-                topBlock);
-            topBlock = currentBlockToPickup;
+                TopBlock);
+            TopBlock = currentBlockToPickup;
             currentBlockToPickup = null;
         }
 
@@ -206,8 +222,8 @@ public class BlockHolder : MonoBehaviour
     {
         height++;
         Vector3 pickupPosition = transform.position + Vector3.up * height;
-        currentBlockToPickup.Pickup(blockParent.transform, pickupPosition, height, BlockLayerAlignment.Center, topBlock);
-        topBlock = currentBlockToPickup;
+        currentBlockToPickup.Pickup(blockParent.transform, pickupPosition, height, BlockLayerAlignment.Center, TopBlock);
+        TopBlock = currentBlockToPickup;
         currentBlockToPickup = null;
     }
 
@@ -215,7 +231,7 @@ public class BlockHolder : MonoBehaviour
     {
         if (context.performed && currentKeyhole != null && currentKeyhole.Locked)
         {
-            if (topBlock != null && currentKeyhole.CompareKey(topBlock) && currentKeyhole.DestroyBlocks)
+            if (TopBlock != null && currentKeyhole.CompareKey(TopBlock) && currentKeyhole.DestroyBlocks)
             {
                 for (int i = 0; i < blockParent.transform.childCount; i++)
                 {
