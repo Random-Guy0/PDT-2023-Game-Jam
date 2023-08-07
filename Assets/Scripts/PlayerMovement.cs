@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     private int jumpCount = 0;
     bool isGrounded, passThroughPlatform;
+    public bool isShrinking;
     
     private float xVelocity, yVelocity, xInputVector, smoothInputVelocity;
 
@@ -48,6 +49,22 @@ public class PlayerMovement : MonoBehaviour
         {
             yVelocity = jumpHeight;
             jumpCount++;
+        }
+    }
+
+    public void OnShrink(InputAction.CallbackContext context)
+    {
+        if (activeAbility == Abilities.Shrink)
+        {
+            if (context.performed)
+            {
+                isShrinking = true;
+            }
+
+            if (context.canceled)
+            {
+                isShrinking = false;
+            }
         }
     }
 
