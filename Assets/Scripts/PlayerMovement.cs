@@ -10,7 +10,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Default,
         DoubleJump,
-        SpeedBoost
+        SpeedBoost,
+        Shrink
     }
 
     [SerializeField] private Abilities activeAbility;
@@ -62,8 +63,6 @@ public class PlayerMovement : MonoBehaviour
             passThroughPlatform = false;
         }
     }
-    
-    //public void OnCrouchRelease()
 
     void FixedUpdate()
     {
