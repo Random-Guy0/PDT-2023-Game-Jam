@@ -155,7 +155,14 @@ public class BlockHolder : MonoBehaviour
 
     public BlockType GetCurrentBlockPower()
     {
-        return TopBlock.BlockType;
+        if (TopBlock != null)
+        {
+            return TopBlock.BlockType;
+        }
+        else
+        {
+            return BlockType.Default;
+        }
     }
 
     private IEnumerator WaitForKeyDown(KeyControl key)
