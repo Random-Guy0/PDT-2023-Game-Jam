@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
         Shrink
     }
 
-    [SerializeField] private Abilities activeAbility;
+    [SerializeField] private BlockType activeAbility;
     
     public CharacterController controller;
 
@@ -33,10 +33,12 @@ public class PlayerMovement : MonoBehaviour
     
     private float xVelocity, yVelocity, xInputVector, smoothInputVelocity;
 
+    private BlockHolder blockHolder;
+
     public void OnMove(InputAction.CallbackContext context)
     {
         float speed = context.ReadValue<float>() * moveSpeed;
-        if (activeAbility == Abilities.SpeedBoost)
+        if (activeAbility == BlockType.SpeedBoost)
         {
             speed *= speedMultiplier;
         }
@@ -45,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed && (isGrounded || (activeAbility == Abilities.DoubleJump && jumpCount < 1)))
+        if (context.performed && (isGrounded || (activeAbility == BlockType.DoubleJump && jumpCount < 1)))
         {
             yVelocity = jumpHeight;
             jumpCount++;
@@ -54,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnShrink(InputAction.CallbackContext context)
     {
-        if (activeAbility == Abilities.Shrink)
+        if (activeAbility == BlockType.Shrink)
         {
             if (context.performed)
             {
@@ -78,6 +80,19 @@ public class PlayerMovement : MonoBehaviour
         if (context.canceled)
         {
             passThroughPlatform = false;
+        }
+    }
+
+    private void Start()
+    {
+        blockHolder = GetComponent<BlockHolder>();
+    }
+
+    private void Update()
+    {
+        if (blockHolder != null)
+        {
+            activeAbility = blockHolder.GetCurrentBlockPower();
         }
     }
 
